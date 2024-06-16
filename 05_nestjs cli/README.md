@@ -1,0 +1,6 @@
+- app.module.ts 
+    - 根模块，用于处理其他类的引用与共享
+- app.controller.ts
+    - 常见功能是用来处理http请求以及调用service层的处理方法
+- app.service.ts 
+    - 封装通用的业务逻辑、与数据层的交互（例如数据库）、其他额外的一些三方请求
