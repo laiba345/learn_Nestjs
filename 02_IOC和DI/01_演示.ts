@@ -45,12 +45,18 @@ class C {
 }
 // 创建一个容器用来收集引用
 class Container {
-    mo: any;
+    mo: any; // mo就是一个简单的类属性，它被定义为any类型。这意味着mo可以保存任何时类型的值
     constructor() {
+        /**
+         * 构造函数初始化mo为一个空对象
+         * 意味着：当你创建一个Container实例时
+         *        mo将开始为空对象，并可以动态地添加键值对
+         */
         this.mo = {};
     }
     // 因为mo可以是任何类型的
     provide(key: string, mo: any) {
+        // 将这个传入进来的mo存储在容器的mo对象中，以key为键进行存储
         this.mo[key] = mo;
     }
     // 如果想取具体的应用的话，可以通过get函数，还有其中的key
@@ -58,6 +64,7 @@ class Container {
         return this.mo[key];
     }
 }
+// 总结：mo在这个类中是一个用来动态存储任意类型
 
 // 实例化
 const mo = new Container();
