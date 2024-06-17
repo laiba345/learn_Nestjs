@@ -240,6 +240,8 @@ export class AppService {
     - 在main.ts中引入，并通过app.use 注册session
         - import * as session from 'express-session'
         - app.use(session())
+- NestJS中的Session是一个用于在应用中管理用户会话的模块，会话（Session）是一种在客户端和服务器之间保持用户状态的方法，通过使用会话可以在多次请求之间保存用户信息，比如登陆状态、用户首选项等。
+    - 用户首选项是指用户在使用应用程序或服务时所设置的个人偏好和定制选项。
 - 参数配置详解
 ```
 secret                生成服务端session 签名 可以理解为加盐
