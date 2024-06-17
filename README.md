@@ -175,6 +175,7 @@ export class AppService {
 - Controller Request（获取前端传过来的参数）
     - 直接通过（npm run start）来启动，如果通过postman发送数据，在控制台就能实际看到
     - nestjs提供了方法参数装饰器 用来帮助我们快速获取参数
+        ```
         @Request()	                  req          
         @Response()	                  res                   
         @Next()	                      next
@@ -184,6 +185,7 @@ export class AppService {
         @Query(key?: string)	      req.query/req.query[key]
         @Headers(name?: string)   	  req.headers/req.headers[name]
         @HttpCode	
+        ```
 - 调试工具可以使用postMan、ApiFox等
 - 1. 获取get请求传参
     - 可以使用Request装饰器 或者 Query 装饰器 跟express 完全一样
