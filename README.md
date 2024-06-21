@@ -252,3 +252,55 @@ rooling               在每次请求时强行设置cookie，这将重置cookie�
 ```
 [验证码案例](https://blog.csdn.net/qq1195566313/article/details/126327047?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171859323016800213027687%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=171859323016800213027687&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-126327047-null-null.nonecase&utm_term=%E7%AC%AC%E4%B9%9D%E7%AB%A0&spm=1018.2226.3001.4450)
 
+## 10. nestjs 提供者
+Providers 
+    - Providers是Nest的一个基本概念
+        - 提供者（Providers）是服务、库和其他功能模块的核心部分。
+        - 提供者是一个用来共享业务逻辑和数据的类
+        - 通过依赖注入（Dependency Injection），NestJS 可以将这些提供者注入到其他类中，以便在应用程序的各个部分之间共享逻辑和数据。
+        - 提供者通常用作服务，执行具体的任务，如数据库访问、外部 API 调用或其他业务逻辑。
+    - 许多基本的 Nest 类可能被视为 provider - service, repository, factory, helper 等等。
+    - 他们都可以通过 constructor 注入依赖关系。
+    - 这意味着对象可以彼此创建各种关系，并且“连接”对象实例的功能在很大程度上可以委托给 Nest运行时系统。 
+    - Provider 只是一个用 @Injectable() 装饰器注释的类。
+基本用法
+- 用法1（语法糖）
+    - 在module中引入service在providers注入
+    - 在Controller就可以使用注入好的service
+- 用法2 
+    - 其实就是用法1的全称
+- 用法3（自定义注入值）
+    - 通过useValue
+- 用法4（ 工厂模式）
+    - 如果服务之间有相互的依赖 或者 逻辑处理 
+    可以使用useFactory
+- [nestjs提供者](https://blog.csdn.net/qq1195566313/article/details/126494064?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171875960316800178514702%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=171875960316800178514702&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-126494064-null-null.nonecase&utm_term=%E7%AC%AC%E5%8D%81%E7%AB%A0&spm=1018.2226.3001.4450)
+## 11. nestjs模块
+- 模块 @Module
+    - 每个 Nest 应用程序至少有一个模块，即根模块。
+    - 根模块是 Nest 开始安排应用程序树的地方。
+    - 事实上，根模块可能是应用程序中唯一的模块，特别是当应用程序很小时，但是对于大型程序来说这是没有意义的。
+    - 在大多数情况下，您将拥有多个模块，每个模块都有一组紧密相关的功能
+- 基本用法
+    - 当我们使用nest g res user 创建一个CURD 模板的时候 nestjs 会自动帮我们引入模块
+- 共享模块
+    - 例如 user 的 Service 想暴露给 其他模块使用就可以使用exports 导出该服务
+    - 本来只能自己单独使用，但是如果使用export进行暴露的话
+    别的模块也可以进行使用操作
+- 全局模块（@Global）
+    - 我们给user模块添加@Global()便注册为全局模块
+    - 在list模块（或者别的模块）中使用无须在module import 导入
+- 动态模块
+    - 动态模块主要就是为了给模块传递参数，可以给该模块添加一个静态方法 用来接收参数
+
+## 12. nestjs 中间件
+- 中间件
+    - 中间件是在路由处理程序之前调用的**函数**。 中间件函数可以访问请求和响应对象（中间件函数可以访问请求和响应对象）
+- 中间件函数可以执行以下任务 
+    - 执行任何代码
+    - 对请求和响应对象进行更改
+    - 结束请求-响应周期
+    - 调用堆栈中的下一个中间件函数
+    - 如果当前的中间件函数没有结束请求-响应周期, 它必须调用 next() 将控制传递给下一个中间件函数。否则, 请求将被挂起
+- 要求：创建一个依赖注入中间件
+    - 要求我们实现use 函数 返回 req res next 参数 如果不调用next 程序将被挂起
